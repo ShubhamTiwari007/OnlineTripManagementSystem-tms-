@@ -1,0 +1,124 @@
+<div class="container">
+    <div class="text-right my-3">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addRouteModel">Add</button>
+    </div>
+
+    <div class="row" [hidden]="!deleteMessage">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <div class="alert alert-info alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>{{message}}</strong>
+            </div>
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
+
+    <table datatable class="row-border hover">
+        <thead>
+            <tr>
+                <th>From</th>
+                <th>To</th>
+                <th>Number of Buses</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let route of routes">
+                <td>{{route.from.name}}</td>
+                <td>{{route.to.name}}</td>
+                <td><a href="#busInfo" data-toggle="modal" (click)='getRoute(route.id)'>{{route.buses.length}}</a></td>
+                
+                <td>
+                    <button class="btn btn-info mr-3" (click)='getRoute(route.id)' data-toggle="modal" data-target="#updateStationModel">Edit</button>
+                    <button class="btn btn-danger" (click)='deleteRoute(route.id)'>Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal for adding route -->
+<div class="modal fade" id="addRouteModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form [formGroup]="saveRoute" #busSave (ngSubmit)="addRoute()">
+                <div>
+                    <h5 class="text-success" *ngIf="isSaved">Route added sucessfully!!</h5><br/>
+                </div>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Route</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>From</mat-label>
+                            <mat-select [(ngModel)]="stationFrom" formControlName="addFrom">
+                                <mat-option *ngFor="let station of stations" [value]="station">
+                                    {{station.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>To</mat-label>
+                            <mat-select [(ngModel)]="stationTo" formControlName="addTo">
+                                <mat-option *ngFor="let station of stations" [value]="station">
+                                    {{station.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Bus</mat-label>
+                            <mat-select [(ngModel)]="bus" formControlName="addBuses" multiple>
+                                <mat-option *ngFor="let bus of buses" [value]="bus">
+                                    {{bus.busNumber}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- mat ends -->
+
+<!-- Modal for displaying hotel information  -->
+<div class="modal fade" id="busInfo">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h4 class="modal-title" style="text-align: center">Bus Information</h4>
+                </div>
+                <div class="modal-body" *ngFor="let bus of route.buses">
+                    <p>Bus Number: {{bus.busNumber}}</p>
+                    <p>Seats: {{bus.currentEmptySeat}}</p>
+                    <p>Driver: {{bus.driver}}</p>
+                    <p>Conductor: {{bus.conductor}}</p>
+                    <p>Departure Time: {{bus.dep}}</p>
+                    <p>Arrival Time: {{bus.arr}}</p>
+                    <p>Price: {{bus.amount}}</p>
+                    <hr/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

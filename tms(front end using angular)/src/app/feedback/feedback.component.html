@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="text-right my-3">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addFeedbackModel">Add</button>
+    </div>
+
+    <div class="row" [hidden]="!deleteMessage">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <div class="alert alert-info alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>{{message}}</strong>
+            </div>
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
+
+    <table datatable class="row-border hover">
+        <thead>
+            <tr>
+                <th>Feedback Description</th>
+                <th>Feedback Rating</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let f of feedbacks">
+                <td>{{f.description}}</td>
+                <td>{{f.rating}}</td>
+                <td>
+                    <button class="btn btn-danger" (click)='deleteFeedback(f.id)'>Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal for adding station-->
+<div class="modal fade" id="addFeedbackModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form [formGroup]="saveFeedback" #feedbackSave (ngSubmit)="addFeedback()">
+                <div>
+                    <h5 class="text-success" *ngIf="isSaved">Feedback added sucessfully!!</h5><br/>
+                </div>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Feedback</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name">Feedback Description</label>
+                        <input type="text" class="form-control" formControlName="fdescription" [(ngModel)]='description' data-toggle="tooltip" data-placement="right" title="Enter Feedback Description">
+                    </div>
+                    <div class="form-group">
+                        <label for="code">Feedback Rating</label>
+                        <input type="text" class="form-control" formControlName="frating" [(ngModel)]='rating' data-toggle="tooltip" data-placement="right" title="Enter Rating">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

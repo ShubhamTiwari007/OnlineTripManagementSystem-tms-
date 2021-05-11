@@ -1,0 +1,55 @@
+<div class="container">
+    <section id="services" class="services m-3">
+        <div class="container" data-aos="fade-up">
+      
+          <div class="row" data-aos="zoom-in" data-aos-delay="100">
+      
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch" *ngFor="let b of packagebookings">
+              
+                <div class="card text-center my-5" style="width: 18rem; text-align: center;">
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <label>Booking ID</label>
+                                <input type="text" class="form-control" id="formGroupExampleInput" disabled
+                                    [value]="b.id">
+                            </div>
+                            <div class="form-group">
+                                <label>Booking Date</label>
+                                <input type="text" class="form-control" id="formGroupExampleInput" disabled
+                                    [value]="b.bookingDate">
+                            </div>
+                            <div class="form-group">
+                                <label>Hotel</label>
+                                <input type="text" class="form-control" id="formGroupExampleInput" disabled
+                                    [value]="b.hotel.name">
+                            </div>
+                            <div class="form-group">
+                                <label>No Of Customer</label>
+                                <input type="text" class="form-control" id="formGroupExampleInput" disabled
+                                    [value]="b.noOfCustomers">
+                            </div>
+                            <div class="form-group">
+                                <label>Amount</label>
+                                <input type="text" class="form-control" id="formGroupExampleInput" disabled
+                                    [value]="b.amount">
+                            </div>
+                           
+                            <div class="">
+                                <button class="btn btn-primary m-2" (click)="onDelete(b.id)">Cancel Booking</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+      
+           
+      
+      
+          </div>
+      
+        </div>
+      </section><!-- End Services Section -->
+      
+</div>

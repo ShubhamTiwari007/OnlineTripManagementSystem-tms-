@@ -1,0 +1,61 @@
+<div class="container">
+    <section id="services" class="services m-3">
+        <div class="container" data-aos="fade-up">
+            <div class="row" data-aos="zoom-in" data-aos-delay="100">
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                </div>
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                    <div class="card text-center my-5" style="width: 18rem; text-align: center;">
+                        <div class="card-body">
+                            <form>
+                                <div class="form-group">
+                                    <label>From</label>
+                                    <input type="text" class="form-control" id="formGroupExampleInput" disabled [value]="from">
+                                </div>
+                                <div class="form-group">
+                                    <label>To</label>
+                                    <input type="text" class="form-control" id="formGroupExampleInput2" disabled [value]="to">
+                                </div>
+                                <div class="form-group">
+                                    <label>Date</label>
+                                    <input type="text" class="form-control" id="formGroupExampleInput2" disabled [ngModel]="date | date" (ngModelChange)="date=$event" name="name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Departure Time</label>
+                                    <input type="text" class="form-control" id="formGroupExampleInput2" disabled value="11:00">
+                                </div>
+                                <div class="form-group">
+                                    <label>Duration</label>
+                                    <input type="text" class="form-control" id="formGroupExampleInput2" disabled value="6H">
+                                </div>
+                                <div class="form-group">
+                                    <label>Arrival Time</label>
+                                    <input type="text" class="form-control" id="formGroupExampleInput2" disabled value="17:00">
+                                </div>
+                                <div class="form-group">
+                                    <label>Fare</label>
+                                    <input type="text" class="form-control" id="formGroupExampleInput2" disabled [value]="rent">
+                                </div>
+                                <div class="form-group">
+                                    <label>No Of Customer</label>
+                                    <input type="text" class="form-control" id="formGroupExampleInput2" disabled [value]="noOfCustomer">
+                                </div>
+                                <div class="form-group">
+                                    <button (click)="onDecrement()" class="btn m-1">-</button> <button (click)="onIncrement()" class="btn m-1">+</button>
+                                </div>
+                                <div class="">
+                                    <button class="btn btn-primary m-2" style="cursor: pointer;" data-toggle="modal" data-target="#exampleModal" (click)="storeBusBooking()">Make Payment</button>
+                                    <button class="btn btn-primary" routerLink="/routedetail">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>

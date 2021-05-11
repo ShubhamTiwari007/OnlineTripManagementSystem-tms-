@@ -1,0 +1,55 @@
+<div class="container">
+    <section id="services" class="services m-3">
+        <div class="container" data-aos="fade-up">
+            <div class="row" data-aos="zoom-in" data-aos-delay="100">
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch" *ngFor="let b of busbookings">
+                    <div class="card text-center my-5" style="width: 18rem; text-align: center;">
+                        <div class="card-body">
+                            <form>
+                                <div class="form-group">
+                                    <label>Booking ID</label>
+                                    <input type="text" class="form-control" id="formGroupExampleInput" disabled [value]="b.id">
+                                </div>
+                                <div class="form-group">
+                                    <label>Booking Date</label>
+                                    <input type="text" class="form-control" id="formGroupExampleInput" disabled [value]="b.bookingDate">
+                                </div>
+                                <div class="form-group">
+                                    <label>Journey Date</label>
+                                    <input type="text" class="form-control" id="formGroupExampleInput" disabled [value]="b.journeyDate | date">
+                                </div>
+                                <div class="form-group">
+                                    <label>from</label>
+                                    <input type="text" class="form-control" id="formGroupExampleInput" disabled [value]="b.from.name">
+                                </div>
+                                <div class="form-group">
+                                    <label>To</label>
+                                    <input type="text" class="form-control" id="formGroupExampleInput" disabled [value]="b.to.name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Departure Time</label>
+                                    <input type="text" class="form-control" id="formGroupExampleInput" disabled [value]="b.dep">
+                                </div>
+                                <div class="form-group">
+                                    <label>Arrival Time</label>
+                                    <input type="text" class="form-control" id="formGroupExampleInput" disabled [value]="b.arr">
+                                </div>
+                                <div class="form-group">
+                                    <label>No Of Passenger</label>
+                                    <input type="text" class="form-control" id="formGroupExampleInput" disabled [value]="b.noOfPass">
+                                </div>
+                                <div class="form-group">
+                                    <label>Amount</label>
+                                    <input type="text" class="form-control" id="formGroupExampleInput" disabled [value]="b.amount">
+                                </div>
+                                <div class="">
+                                    <button type="submit" class="btn btn-primary m-2" (click)="deleteBusBookingById(b.id)">Cancel Booking</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

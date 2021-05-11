@@ -1,0 +1,33 @@
+body {
+    margin-top: 20px;
+}
+
+.panel-title {
+    display: inline;
+    font-weight: bold;
+}
+
+.checkbox.pull-right {
+    margin: 0;
+}
+
+.pl-ziro {
+    padding-left: 0px;
+}
+
+.container {
+    background: -webkit-linear-gradient(to top, #7a8076, #9ad4d8);
+    background: -moz-linear-gradient(to top, #7a8076, #9ad4d8);
+    background: -o-linear-gradient(to top, #7a8076, #9ad4d8);
+    background: linear-gradient(to top, #7a8076, #9ad4d8);
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: 'Roboto', sans-serif;
+}
+
+.card-body {
+    background: -webkit-linear-gradient(to top, #7a8076, #9ad4d8);
+    background: -moz-linear-gradient(to top, #7a8076, #9ad4d8);
+    background: -o-linear-gradient(to top, #7a8076, #9ad4d8);
+    background: linear-gradient(to top, #7a8076, #9ad4d8);
+}

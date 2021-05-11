@@ -1,0 +1,11 @@
+.card {
+    margin: 10px;
+}
+
+.container {
+    background-color: rgb(202, 211, 219);
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: 'Roboto', sans-serif;
+    height: 100%;
+}

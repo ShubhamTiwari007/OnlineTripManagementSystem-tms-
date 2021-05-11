@@ -1,0 +1,105 @@
+<div class="container">
+    <div class="text-right my-3">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addStationModel">Add</button>
+    </div>
+
+    <div class="row" [hidden]="!deleteMessage">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <div class="alert alert-info alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>{{message}}</strong>
+            </div>
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
+
+    <table datatable class="row-border hover">
+        <thead>
+            <tr>
+                <th>Station name</th>
+                <th>Station code</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let s of stations">
+                <td>{{s.name}}</td>
+                <td>{{s.code}}</td>
+                <td>
+                    <button class="btn btn-info mr-3" (click)='getStation(s.id)' data-toggle="modal" data-target="#updateStationModel">Edit</button>
+                    <button class="btn btn-danger" (click)='deleteStation(s.id)'>Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal for adding station-->
+<div class="modal fade" id="addStationModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form [formGroup]="saveStation" #stationSave (ngSubmit)="addStation()">
+                <div>
+                    <h5 class="text-success mt-4 text-center" *ngIf="isSaved">Station added sucessfully!!</h5><br/>
+                </div>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Station</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name">Station Name</label>
+                        <input type="text" class="form-control" formControlName="sname" [(ngModel)]='name' data-toggle="tooltip" data-placement="right" title="Enter Station Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="code">Station code</label>
+                        <input type="text" class="form-control" formControlName="scode" [(ngModel)]='code' data-toggle="tooltip" data-placement="right" title="Enter Station Code">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--Model for editing the station-->
+<div class="modal fade" id="updateStationModel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form [formGroup]="stationupdateform" #updateStation (ngSubmit)="updateStationDetails()">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title" style="text-align: center">Update Station</h4>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div [hidden]="isupdated">
+                        <input type="hidden" class="form-control" formControlName="uid" [(ngModel)]="station.id">
+                        <div class="form-group">
+                            <label for="name">Station Name</label>
+                            <input type="text" class="form-control" formControlName="uname" [(ngModel)]="station.name">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Station Code</label>
+                            <input type="text" class="form-control" formControlName="ucode" [(ngModel)]="station.code">
+                        </div>
+                    </div>
+                    <div [hidden]="!isupdated">
+                        <h4>Station Detail Updated!</h4>
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success" [hidden]="isupdated">Update</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="changeisUpdate()">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

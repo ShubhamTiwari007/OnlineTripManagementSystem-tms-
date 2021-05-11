@@ -1,0 +1,46 @@
+<!-- Sing in  Form -->
+<section class="sign-in">
+  <div class="container">
+    <div class="signin-content">
+      <div class="signin-image">
+        <figure><img src="../../assets/signin-image.jpg" alt="sing up image"></figure>
+      </div>
+
+      <div class="signin-form">
+        <h2 class="form-title">Login</h2>
+        <form class="register-form" id="login-form" (ngSubmit)="loginCheck()">
+        
+          <div class="example-container">
+            <mat-form-field appearance="fill">
+              <mat-label>Enter your Username</mat-label>
+              <input matInput  [formControl]="username" required [(ngModel)]="uname">
+              <mat-error *ngIf="username.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </div>
+          <br>
+
+          <mat-form-field appearance="fill">
+              <mat-label>Enter your password</mat-label>
+              <input matInput [type]="hide ? 'password' : 'text'" [formControl]="password" required [(ngModel)]="pass">
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+              <mat-error *ngIf="password.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>         
+            
+            <mat-radio-group aria-label="Select an option" [formControl]="role">
+              <mat-error *ngIf="role.invalid">{{getErrorMessage()}}</mat-error>
+              <mat-radio-button value="Customer">Customer &nbsp; &nbsp;</mat-radio-button>
+              <mat-radio-button value="Admin">Admin</mat-radio-button>
+            </mat-radio-group>
+            
+          
+          <div class="form-group form-button">
+            <input type="submit" name="signin" id="signin" class="form-submit" value="Log in"/>
+          </div>
+        </form><br>
+        <p>Don't have an Account? <a routerLink="/signup"> Register here</a></p>
+      </div>
+    </div>
+  </div>
+</section>

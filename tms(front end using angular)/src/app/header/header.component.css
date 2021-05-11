@@ -1,0 +1,44 @@
+.collapse ul li .active {
+    background: rgb(149, 151, 212);
+    border-radius: 10px;
+    color: rgb(255, 255, 255); 
+    /* margin: 10px; */
+    height: 50px;
+    width: 100px;
+}
+
+.navbar{
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+   font-family: "Open Sans", sans-serif;
+   font-size: 20px;
+}
+
+.navbar a img{
+    height: 50px;
+    width: 80px;
+}
+
+.navbar-nav li{
+    margin: 10px;
+    height: 50px;
+    width: 100px;
+    text-align: center;
+}
+
+.navbar-nav li a {
+    color:black;
+}
+
+.navbar-nav li:hover {
+    background: rgb(149, 151, 212);
+    border-radius: 10px;
+}
+
+.navbar-nav li a:hover {
+    color: rgb(255, 255, 255); 
+}
+
+.info-pack {
+    color: red;
+    border: 1px solid black;
+}

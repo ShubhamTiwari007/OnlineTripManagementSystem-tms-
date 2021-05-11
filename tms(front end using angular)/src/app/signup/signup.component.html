@@ -1,0 +1,56 @@
+<!-- main -->
+<!-- main -->
+<div class="container">
+    <div class="main-w3layouts wrapper">
+        <h1>SignUp Form</h1>
+        <div class="main-agileinfo">
+            <div class="agileits-top">
+                <form [formGroup]="signupForm" (ngsubmit)="onSubmit()">
+                    <input type="text" [(ngModel)]="name" formControlName="cname" class="form-control mb-1"
+                        placeholder="Name" required autofocus>
+                    <div class="text-danger"
+                        *ngIf="signupForm.get('cname').invalid && (signupForm.get('cname').touched)">
+                        Please Enter Name.
+                    </div><br>
+                    <input type="text" [(ngModel)]="mobileNo" formControlName="cmobileNo" class="form-control mb-1"
+                        placeholder="MobileNo" required autofocus>
+                    <div class="text-danger"
+                        *ngIf="signupForm.get('cmobileNo').invalid && (signupForm.get('cmobileNo').touched)">
+                        Please Enter MobileNo.
+                    </div><br>
+                    <input type="text" [(ngModel)]="address" formControlName="caddress" class="form-control mb-1"
+                        placeholder="Address" required autofocus>
+                    <div class="text-danger"
+                        *ngIf="signupForm.get('caddress').invalid && (signupForm.get('caddress').touched)">
+                        Please Enter Address.
+                    </div><br>
+                    <input type="email" [(ngModel)]="email" formControlName="cemail" class="form-control mb-1"
+                        placeholder="Email" required>
+                    <div class="text-danger"
+                        *ngIf="signupForm.get('cemail').invalid && (signupForm.get('cemail').touched)">
+                        Please enter a valid email.
+                    </div><br>
+                    <input type="text" [(ngModel)]="username" formControlName="cusername" class="form-control mb-1"
+                        placeholder="Username" required autofocus>
+                    <div class="text-danger"
+                        *ngIf="signupForm.get('cusername').invalid && (signupForm.get('cusername').touched)">
+                        Please Enter Username.
+                    </div><br>
+                    <input type="password" [(ngModel)]="password" formControlName="cpassword" class="form-control mb-1"
+                        placeholder="Password" required>
+                    <div class="text-danger"
+                        *ngIf="signupForm.get('cpassword').invalid && (signupForm.get('cpassword').touched)">
+                        Please Enter Password.
+                    </div><br>
+                    <input type="password" formControlName="cconfirmPassword" class="form-control mb-1"
+                        placeholder="Confirm Password" required>
+                    <div class="text-danger"
+                        *ngIf="signupForm.get('cconfirmPassword').invalid && (signupForm.get('cconfirmPassword').touched)">
+                        Please Confirm Password.
+                    </div><br>
+                    <button class="btn btn-lg btn-primary btn-block mb-2" type="submit" (click)="onSubmit()"
+                        [disabled]="signupForm.invalid">Sign Up</button>
+                </form>
+                <p>Already have an Account? <a routerLink="/login"> Login Now!</a></p>
+            </div>
+            <!-- //main -->

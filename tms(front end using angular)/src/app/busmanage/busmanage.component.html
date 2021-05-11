@@ -1,0 +1,144 @@
+<div class="container">
+    <div class="text-right my-3">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addBusModel">Add</button>
+    </div>
+
+
+
+    <table datatable class="row-border hover">
+        <thead>
+            <tr>
+                <th>Bus Number</th>
+                <th>Driver</th>
+                <th>Conductor</th>
+                <th>Departure time</th>
+                <th>Arrival time</th>
+                <th>Fare</th>
+                <th>Available Seats</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let bus of buses">
+                <td>{{bus.busNumber}}</td>
+                <td>{{bus.driver}}</td>
+                <td>{{bus.conductor}}</td>
+                <td>{{bus.dep}}</td>
+                <td>{{bus.arr}}</td>
+                <td>{{bus.amount}}</td>
+                <td>{{bus.currentEmptySeat}}</td>
+                <td>
+                    <button class="btn btn-info mr-3" (click)='getBus(bus.id)' data-toggle="modal" data-target="#updateBusModel">Edit</button>
+                    <button class="btn btn-danger" (click)='deleteBus(bus.id)'>Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal for adding bus -->
+<div class="modal fade" id="addBusModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form [formGroup]="saveBus" #busSave (ngSubmit)="addBus()">
+               
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Bus</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name">Bus Number</label>
+                        <input type="text" class="form-control" formControlName="bnumber" [(ngModel)]='busnum' data-toggle="tooltip" data-placement="right" title="Enter Bus Number">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Driver</label>
+                        <input type="text" class="form-control" formControlName="busdriver" [(ngModel)]='driver' data-toggle="tooltip" data-placement="right" title="Enter Bus Driver">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Conductor</label>
+                        <input type="text" class="form-control" formControlName="busconductor" [(ngModel)]='conductor' data-toggle="tooltip" data-placement="right" title="Enter Bus Conductor">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Departure time</label>
+                        <input type="time" class="form-control" formControlName="busdept" [(ngModel)]='dept' data-toggle="tooltip" data-placement="right" title="Enter Departure Time">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Arrival time</label>
+                        <input type="time" class="form-control" formControlName="busarr" [(ngModel)]='arr' data-toggle="tooltip" data-placement="right" title="Enter Arrival Time">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Amount</label>
+                        <input type="text" class="form-control" formControlName="busamt" [(ngModel)]='amount' data-toggle="tooltip" data-placement="right" title="Enter Amount">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Seats</label>
+                        <input type="text" class="form-control" formControlName="busseat" [(ngModel)]='currentEmptySeat' data-toggle="tooltip" data-placement="right" title="Enter Seats">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--Model for editing the station-->
+<div class="modal fade" id="updateBusModel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form [formGroup]="busupdateform" #updateBus (ngSubmit)="updateBusDetails()">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title" style="text-align: center">Update Bus</h4>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div [hidden]="isupdated">
+                        <input type="hidden" class="form-control" formControlName="updateid" [(ngModel)]="bus.id">
+                        <div class="form-group">
+                            <label for="name">Bus Number</label>
+                            <input type="text" class="form-control" formControlName="updatenumber" [(ngModel)]="bus.busNumber">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Driver</label>
+                            <input type="text" class="form-control" formControlName="updatedriver" [(ngModel)]="bus.driver">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Conductor</label>
+                            <input type="text" class="form-control" formControlName="updateconductor" [(ngModel)]="bus.conductor">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Departure time</label>
+                            <input type="time" class="form-control" formControlName="updatedept" [(ngModel)]='bus.dep'>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Arrival time</label>
+                            <input type="time" class="form-control" formControlName="updatearr" [(ngModel)]='bus.arr'>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Amount</label>
+                            <input type="text" class="form-control" formControlName="updateamt" [(ngModel)]='bus.amount'>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Seats</label>
+                            <input type="text" class="form-control" formControlName="updateseat" [(ngModel)]='bus.currentEmptySeat'>
+                        </div>
+                    </div>
+                    <div [hidden]="!isupdated">
+                        <h4>Station Detail Updated!</h4>
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success" [hidden]="isupdated">Update</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="changeisUpdate()">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

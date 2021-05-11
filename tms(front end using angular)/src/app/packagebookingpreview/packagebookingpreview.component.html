@@ -1,0 +1,58 @@
+<div class="container">
+    <section id="services" class="services m-3">
+        <div class="container" data-aos="fade-up">
+            <div class="row" data-aos="zoom-in" data-aos-delay="100">
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                </div>
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                    <div class="card text-center my-5" style="width: 18rem; text-align: center;">
+                        <div class="card-body">
+                            <form>
+                                <div class="form-group">
+                                    <label>Package</label>
+                                <input type="text" class="form-control" id="formGroupExampleInput" disabled [value]="package.name">
+                                  </div>
+                                <div class="form-group">
+                                    <label>Hotel</label>
+                                    <input type="text" class="form-control" id="formGroupExampleInput" disabled
+                                        name="hotel.name" [value]="hotel.name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Schedule Date</label>
+                                    <input type="date" class="form-control" [(ngModel)]="plannedDate" name="plannedDate">
+                                </div>
+                                <div class="form-group">
+                                    <label>Duration</label>
+                                    <input type="text" class="form-control" [(ngModel)]="package.duration" name="plannedDate" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label>Amount</label>
+                                    <input type="text" class="form-control" id="formGroupExampleInput2" disabled [(value)]="totalamt">
+                                </div>
+                                <div class="form-group">
+                                    <label>No Of Customer</label>
+                                    <input type="text" class="form-control" id="formGroupExampleInput2" disabled [(value)]="noOfCustomer">
+                                </div>
+                                <div class="form-group">
+                                    <button (click)="onDecrement()" class="btn m-1">-</button> <button
+                                        (click)="onIncrement()" class="btn m-1">+</button>
+                                </div>
+                                <div class="">
+                                    <a class="btn btn-primary m-2" (click)="storePackageBooking()">Make Payment</a>
+                                    <button class="btn btn-primary">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- End Services Section -->
+
+</div>

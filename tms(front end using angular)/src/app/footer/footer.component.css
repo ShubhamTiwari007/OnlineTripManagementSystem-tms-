@@ -1,0 +1,28 @@
+/*--------------------------------------------------------------
+# Footer
+--------------------------------------------------------------*/
+#footer {
+    color: #37423b;
+    font-size: 14px;
+    background: #eef0ef;
+  }
+  
+  #footer .credits {
+    padding-top: 5px;
+    font-size: 13px;
+    text-align: center;
+  }
+
+  .text-center {
+      text-align: center;
+  }
+  
+  #footer .credits a {
+    color: #3ac162;
+    transition: 0.3s;
+  }
+  
+  #footer .credits a:hover {
+    color: #5fcf80;
+  }
+  

@@ -1,0 +1,169 @@
+<div class="container">
+    <div class="text-right my-3">
+        <button type="button" class="btn btn-primary" (click)='addNewPackage()'>Add</button>
+    </div>
+
+    <table datatable class="row-border hover" id="packageDataTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Destination</th>
+                <th>Duration</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Number of hotels</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let package of packages">
+                <td>{{package.name}}</td>
+                <td>{{package.destination}}</td>
+                <td>{{package.duration}}</td>
+                <td>{{package.description}}</td>
+                <td>{{package.price}}</td>
+                <td><a href="#hotleInfo" data-toggle="modal" (click)='getPackage(package.id)'>{{package.hotels.length}}</a></td>
+                <td>
+                    <button class="btn btn-info m-2" (click)='getPackage(package.id)' data-toggle="modal" data-target="#updatePackageModel">Edit</button>
+                    <button class="btn btn-danger" (click)='deletePackage(package.id)'>Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal for adding package -->
+<div class="modal fade" id="addPackageModel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form [formGroup]="savePackage" #hotelSave (ngSubmit)="addPackage()">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Package</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" formControlName="addName" [(ngModel)]='packageName'>
+                        <p class="alert-danger" *ngIf="savePackage.get('addName')?.touched && savePackage.get('addName')?.invalid">Name required</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Destination</label>
+                        <input type="text" class="form-control" formControlName="addDestination" [(ngModel)]='packageDestination'>
+                        <p class="alert-danger" *ngIf="savePackage.get('addDestination')?.touched && savePackage.get('addDestination')?.invalid">Destination required</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Duration</label>
+                        <input type="text" class="form-control" formControlName="addDuration" [(ngModel)]='packageDuration'>
+                        <p class="alert-danger" *ngIf="savePackage.get('addDuration')?.touched && savePackage.get('addDuration')?.invalid">Duration required</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Description</label>
+                        <input type="text" class="form-control" formControlName="addDescription" [(ngModel)]='packageDescription'>
+                        <p class="alert-danger" *ngIf="savePackage.get('addDescription')?.touched && savePackage.get('addDescription')?.invalid">Description required</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Price</label>
+                        <input type="number" class="form-control" formControlName="addPrice" [(ngModel)]='packagePrice'>
+                        <p class="alert-danger" *ngIf="savePackage.get('addPrice')?.touched && savePackage.get('addPrice')?.invalid">Price required</p>
+                    </div>
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Hotels</mat-label>
+                            <mat-select [(ngModel)]="packageHotels" formControlName="addHotels" multiple>
+                                <mat-option *ngFor="let hotel of hotels" [value]="hotel">
+                                    {{hotel.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <p class="alert-danger" *ngIf="savePackage.get('addHotels')?.touched && savePackage.get('addHotels')?.invalid">Hotel required</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success" [disabled]="!savePackage.valid">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for updating route -->
+<div class="modal fade" id="updatePackageModel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form [formGroup]="packageupdateform" #updatePackage (ngSubmit)="updatePackageDetails()">
+                <div class="modal-header">
+                    <h4 class="modal-title" style="text-align: center">Update Package</h4>
+                </div>
+                <div class="modal-body">
+                    <div [hidden]="isupdated">
+                        <input type="text" class="form-control" formControlName="updateId" [(ngModel)]="package.id">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" formControlName="updateName" [(ngModel)]='package.name'>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Destination</label>
+                            <input type="text" class="form-control" formControlName="updateDestination" [(ngModel)]='package.destination'>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Duration</label>
+                            <input type="text" class="form-control" formControlName="updateDuration" [(ngModel)]='package.duration'>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Description</label>
+                            <input type="text" class="form-control" formControlName="updateDescription" [(ngModel)]='package.description'>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Price</label>
+                            <input type="number" class="form-control" formControlName="updatePrice" [(ngModel)]='package.price'>
+                        </div>
+                        <div class="form-group">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Hotels</mat-label>
+                                <mat-select [(ngModel)]="package.hotels" formControlName="updateHotels" multiple>
+                                    <mat-option *ngFor="let hotel of hotels" [value]="hotel">
+                                        {{hotel.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div [hidden]="!isupdated">
+                        <h4>Package Detail Updated!</h4>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success" [hidden]="isupdated">Update</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="changeisUpdate()">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for displaying hotel information  -->
+<div class="modal fade" id="hotleInfo">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h4 class="modal-title" style="text-align: center">Hotel Information</h4>
+                </div>
+                <div class="modal-body" *ngFor="let hotel of package.hotels">
+                    <p>Name: {{hotel.name}}</p>
+                    <p>Address: {{hotel.address}}</p>
+                    <p>Description: {{hotel.description}}</p>
+                    <p>Price: {{hotel.rent}}</p>
+                    <hr/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

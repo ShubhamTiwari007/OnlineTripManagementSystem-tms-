@@ -1,0 +1,13 @@
+.container {
+    height: 90vh;
+    width: 100%;
+    color: rgb(34, 32, 32);
+    text-align: center;
+    background-size: cover;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to right, rgba(185, 176, 176, 0.9), rgba(26, 15, 15, 0.5)), url('../../assets/busbookingbackground.jpg');
+}
+
+.fields div {
+    margin: 15px;
+}

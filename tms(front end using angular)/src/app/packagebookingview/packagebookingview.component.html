@@ -1,0 +1,24 @@
+<!-- Hotels Card Start -->
+
+<div class="container">
+    <div>
+        <h1 class="text-center m-5">Choose Hotel to Stay</h1>
+    </div>
+    <h2 *ngIf="blankMessage">Sorry, No Hotel under this package...</h2>
+    <div class="row">
+        <div class="col-lg-4 d-flex align-items-stretch m-5" *ngFor="let hotel of package.hotels">
+            <div class="card" style="width: 18rem;">
+                <img [src]="hotel.profile" class="card-img-top rounded mx-auto d-block" alt="Hotel_Image">
+                <div class="card-body">
+                    <h3 class="card-title">{{hotel.name}}</h3>
+                    <p class="card-text"><b>Address: </b>{{hotel.address}}</p>
+                    <p class="card-text"><b>Description: </b>{{hotel.description}}</p>
+                    <p class="card-text"><b>Price: </b>{{hotel.rent | currency:'INR'}}</p>
+                    <a class="btn btn-primary" routerLink="/packagebookingpreview" (click)="onSelectHotel(hotel.id)">Book Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Hotel Card Ends -->

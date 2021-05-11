@@ -1,0 +1,36 @@
+<div class="container">
+    <div> <br><br><br><br><br><br>
+        <div>
+            <h1 class="text-center mb-5 ">{{date | date}}</h1>
+            <h1 class="text-center mb-5 ">{{from}} <span class="material-icons">
+            arrow_right_alt
+            </span> {{to}}</h1>
+        </div>
+        <div class="table-responsive my-10">
+            <table class="mat-elevation-z8 table">
+                <thead>
+                    <tr>
+                        <th scope="col">Bus Number</th>
+                        <th scope="col" class="text-center">Dept. Time</th>
+                        <th scope="col" class="text-center">Arr. Time</th>
+                        <th scope="col" class="text-center">Fare</th>
+                        <th scope="col" class="text-center">Rating</th>
+                        <th scope="col" class="text-center">Available seats</th>
+                        <th scope="col" class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let data of mydata">
+                    <tr *ngFor="let i of data.buses">
+                        <td scope="col">{{i.busNumber}}</td>
+                        <td class="text-center" scope="col">{{i.dep}}</td>
+                        <td class="text-center" scope="col">{{i.arr}}</td>
+                        <td class="text-center" scope="col">{{i.amount}}</td>
+                        <td class="text-center" scope="col">4.5</td>
+                        <td class="text-center" scope="col">{{i.currentEmptySeat}}</td>
+                        <td class="text-center" scope="col"><a class="btn btn-primary" routerLink="/busbookingview" (click)="onBooking(i.id)">Book</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

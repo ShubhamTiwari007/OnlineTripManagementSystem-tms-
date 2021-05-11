@@ -1,0 +1,114 @@
+<div class="container">
+    <div class="text-right my-3">
+        <button type="button" class="btn btn-primary" (click)="addNewHotel()">Add</button>
+    </div>
+
+    <table datatable class="row-border hover" id="hotelDataTable">
+        <thead>
+            <tr>
+                <th>Hotel Name</th>
+                <th>Hotel Address</th>
+                <th>Hotel Description</th>
+                <th>Hotel Rent</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let h of hotels">
+                <td>{{h.name}}</td>
+                <td>{{h.address}}</td>
+                <td>{{h.description}}</td>
+                <td>{{h.rent}}</td>
+                <td>
+                    <button class="btn btn-info m-2" (click)='getHotel(h.id)' data-toggle="modal" data-target="#updateHotelModel">Edit</button>
+                    <button class="btn btn-danger" (click)='deleteHotel(h.id)'>Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal for adding hotel-->
+<div class="modal fade" id="addHotelModel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form [formGroup]="saveHotel" #hotelSave (ngSubmit)="addHotel()">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Hotel</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name">Hotel Name</label>
+                        <input type="text" class="form-control" formControlName="hname" [(ngModel)]='name'>
+                        <p class="alert-danger" *ngIf="saveHotel.get('hname')?.touched && saveHotel.get('hname')?.invalid">Hotle Name required</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Hotel Address</label>
+                        <input type="text" class="form-control" formControlName="haddress" [(ngModel)]='address'>
+                        <p class="alert-danger" *ngIf="saveHotel.get('haddress')?.touched && saveHotel.get('haddress')?.invalid">Hotel Address required</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Hotel Description</label>
+                        <input type="text" class="form-control" formControlName="hdescription" [(ngModel)]='description'>
+                        <p class="alert-danger" *ngIf="saveHotel.get('hdescription')?.touched && saveHotel.get('hdescription')?.invalid">Hotle description required</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="rent">Hotel Rent</label>
+                        <input type="text" class="form-control" formControlName="hrent" [(ngModel)]='rent'>
+                        <p class="alert-danger" *ngIf="saveHotel.get('hrent')?.touched && saveHotel.get('hrent')?.invalid">Hotel rent required</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success" [disabled]='!saveHotel.valid'>Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--Model for editing the hotel-->
+<div class="modal fade" id="updateHotelModel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form [formGroup]="hotelupdateform" #updatehotel (ngSubmit)="updateHotelDetails()">
+
+                <div class="modal-header">
+                    <h4 class="modal-title" style="text-align: center">Update Hotel</h4>
+                </div>
+                <div class="modal-body">
+                    <div [hidden]="isupdated">
+                        <input type="hidden" class="form-control" formControlName="uid" [(ngModel)]="hotel.id">
+                        <div class="form-group">
+                            <label for="name">Hotel Name</label>
+                            <input type="text" class="form-control" formControlName="uname" [(ngModel)]="hotel.name">
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Hotel Address</label>
+                            <input type="text" class="form-control" formControlName="uaddress" [(ngModel)]="hotel.address">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Hotel Description</label>
+                            <input type="text" class="form-control" formControlName="udescription" [(ngModel)]="hotel.description">
+                        </div>
+                        <div class="form-group">
+                            <label for="rent">Hotel Rent</label>
+                            <input type="text" class="form-control" formControlName="urent" [(ngModel)]="hotel.rent">
+                        </div>
+                    </div>
+                    <div [hidden]="!isupdated">
+                        <h4>Hotel Detail Updated!</h4>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success" [hidden]="isupdated">Update</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="changeisUpdate()">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
